@@ -8,10 +8,14 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v2
-    - run: docker build -t  .
-    - run: docker run -p 8080:8080 -d <your username>/node-web-app
-    - run: docker ps
+      - uses: actions/checkout@v2
+      - run: docker stop wtchat || true && docker rm wtchat || true
+      - name: build container
+        run: |
+          cd /home/ubuntu/actions-runner/_work/diploma/diploma
+          docker build -t gladdos/wtchat .
+          
+      - run: docker run --name wtchat -p 8080:8080 -d gladdos/wtchat
+      - run: docker ps
