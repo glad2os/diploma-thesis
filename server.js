@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
-const file = path.join(__dirname, 'wtchat2.db');
+const file = path.join(__dirname, 'wtchat.db');
 
 //TODO: вынести в users.js
 function generateToken(length) {
