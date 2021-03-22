@@ -11,11 +11,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - run: docker stop wtchat || true && docker rm wtchat || true
-      - name: build container
+
+      - name: Cleaning up Docker Images
+        run: docker stop wtchat || true && docker rm wtchat || true
+
+      - name: Building Docker Image
         run: |
           cd /home/ubuntu/actions-runner/_work/diploma/diploma
           docker build -t gladdos/wtchat .
-          
-      - run: docker run --name wtchat -p 8080:8080 -d gladdos/wtchat
-      - run: docker ps
+
+      - name: Running Docker Image
+        run: docker run --name wtchat -p 8080:8080 -d gladdos/wtchat
