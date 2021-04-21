@@ -70,7 +70,7 @@ io.on('connection', socket => {
     socket.on('chatMessage', msg => {
         //TODO: TypeError: Cannot read property 'room' of undefined
         const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('message', formatMessage(user.username, msg));
+        if (user !== undefined) io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
 
     socket.on('disconnect', () => {
