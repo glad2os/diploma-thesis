@@ -21,4 +21,4 @@ jobs:
           docker build -t gladdos/wtchat .
 
       - name: Running Docker Image
-        run: docker run --name wtchat -p 8080:8080 -d gladdos/wtchat
+        run: docker run --restart unless-stopped --name wtchat -p 8080:8080 -d gladdos/wtchat
