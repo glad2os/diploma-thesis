@@ -10,9 +10,7 @@
   "author": "gladdos",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.0.0-beta3",
     "express": "^4.17.1",
-    "gulp": "^4.0.2",
     "moment": "^2.29.1",
     "socket.io": "^4.0.0",
     "sqlite3": "^5.0.2"
