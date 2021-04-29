@@ -39,3 +39,7 @@ chatForm.addEventListener('submit', (e) => {
     e.target.elements.msg.value = "";
     e.target.elements.msg.focus();
 });
+
+socket.on('disconnect', () => {
+    window.location.href = '/';
+});

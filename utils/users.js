@@ -9,7 +9,6 @@ function userJoin(id, username, room) {
 }
 
 // get current user
-
 function getCurrentUser(id) {
     return users.find(user => user.id === id);
 }
@@ -20,6 +19,15 @@ function userLeave(id) {
     if (index !== -1) {
         return users.splice(index, 1)[0];
     }
+}
+
+function generateToken(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+|';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
 }
 
 // Get room users
