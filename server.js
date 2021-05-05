@@ -22,13 +22,10 @@ io.on('connection', socket => {
     require('./socketio/disconnect')(io, socket);
 });
 
-const PORT = () => {
-    if (process.env.WEB_PORT === undefined) return 8080;
-    else return process.env.WEB_PORT;
-}
+const PORT = typeof process.env.WEB_PORT === 'undefined' ? 8080 : process.env.WEB_PORT
 
 app.use('/api', api);
 
-server.listen(PORT(), () => {
-    console.log(`Server running on port ${PORT()}`)
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
 });

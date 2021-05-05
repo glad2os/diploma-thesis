@@ -1,122 +1,192 @@
 @font-face {
-  font-family: "Bahnschrift";
-  src: url("../font/BAHNSCHRIFT.TTF") format("truetype");
+  font-family: "SofiaProRegular";
+  src: url("../font/Sofia Pro Regular Az.otf") format("opentype");
+}
+@font-face {
+  font-family: "SofiaProLight";
+  src: url("../font/Sofia Pro Light Az.otf") format("opentype");
+}
+@font-face {
+  font-family: "SofiaProSemiBold";
+  src: url("../font/Sofia Pro Semi Bold Az.otf") format("opentype");
 }
 * {
   margin: 0;
   padding: 0;
-  font-family: "Bahnschrift", serif;
+  font-family: "SofiaProLight", sans-serif;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
   display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  background-color: #eeeeee;
-}
-
-.languages {
-  display: inline-flex;
-  position: absolute;
-  right: 5%;
-  top: 17px;
-  font-size: 32px;
-}
-.languages * {
-  margin-right: 32px;
-}
-.languages .eng, .languages .ru {
-  cursor: pointer;
-}
-.languages :last-child {
-  margin-right: 0 !important;
-}
-
-.header {
-  display: flex;
   flex-direction: row;
-  margin-left: 5%;
-  margin-right: 5%;
 }
-.header .logo {
+
+.nav {
+  height: 100vh;
+  flex: 0 0 2%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.nav .item {
+  cursor: pointer;
+  display: flex;
+  width: 25px;
+  height: 25px;
+}
+.nav .item :hover {
+  opacity: 0.8;
+}
+
+.info {
+  border-radius: 15px 0 0 15px;
+  border-left: #f1f7fc groove 1px;
+  width: 100%;
+  display: flex;
+  flex: 0 0 25%;
+  height: 100vh;
+  background-color: #f1f7fc;
+}
+.info .content {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-.header .logo img {
-  height: 139px;
-  width: 139px;
-}
-.header .logo .title {
-  font-size: 64px;
-}
-.header .navbar {
-  display: inline-flex;
-  align-items: center;
+.info .content .server-info {
+  display: flex;
   justify-content: center;
-  flex: 1;
+  font-size: 1.4rem;
 }
-.header .navbar .item {
-  margin-right: 51px;
-  font-size: 32px;
-  cursor: pointer;
+.info .content .server-info .server {
+  display: inline-flex;
+  margin: 10px 0 0 20px;
+}
+.info .content .server-info .server .room {
+  margin-left: 5px;
+  font-family: "SofiaProSemiBold", sans-serif;
+}
+.info .content .server-info .hrline {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+.info .content .server-info .hrline hr {
+  width: 50%;
+  color: #e7e7e7;
+}
+.info .content .server-info .user-info {
+  display: flex;
+}
+.info .content .server-info .user-info .profile-img {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.info .content .server-info .user-info .profile-img img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50% 50% 50% 50%;
+  border: #dbdbdb solid 1px;
+}
+.info .content .server-info .user-info .nickname {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.info .content .online {
+  display: flex;
+  flex: 1;
+  background-color: #ffffff;
+  width: 90%;
+  align-self: center;
+  border-radius: 2.5% 0 0 2.5%;
+  margin: 15px 0 15px 0;
+  border-top: #dbdbdb solid 1px;
+  border-left: #dbdbdb solid 1px;
 }
 
 .container {
-  background: url("../img/bg.png");
-  background-size: cover;
   display: flex;
-  flex-direction: column;
   flex: 1;
+  height: 100vh;
 }
-.container .text {
-  color: white;
-  display: flex;
-  font-size: 32px;
-  justify-content: center;
-  margin-top: 25px;
-}
-.container .form {
-  display: flex;
-  flex-direction: column;
+.container .msg {
   flex: 1;
-  justify-content: center;
-  align-self: center;
+  overflow-y: auto;
+  word-wrap: break-word;
 }
-.container .form .form-btn {
-  color: white;
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+.container .msg .message .text {
+  word-wrap: anywhere;
 }
-.container .form .form-btn :first-child {
-  margin-right: 32px;
+.container .send-message {
+  height: 50px;
+  background-color: #f1f7fc;
+  border-radius: 25px 25px 25px 25px;
+  border: #ececec groove 1px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  margin: 15px;
 }
-.container .form .form-btn input {
-  font-size: 32px;
+.container .send-message .form__group {
+  margin-left: 25px;
+  margin-right: 25px;
+  position: relative;
+  padding: 5px 0 0;
 }
-
-.footer {
-  display: flex;
-  flex-direction: row;
+.container .send-message .form__field {
   width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 20px;
+  border: 0;
+  border-bottom: 2px solid #dbdbdb;
+  outline: 0;
+  font-size: 1rem;
+  color: #231e1e;
+  padding: 9px 0;
+  background: transparent;
+  transition: border-color 0.2s;
 }
-.footer .author {
-  display: flex;
-  margin-left: 32px;
+.container .send-message .form__field::placeholder {
+  color: transparent;
 }
-.footer .social {
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  margin-right: 32px;
+.container .send-message .form__field:placeholder-shown ~ .form__label {
+  font-size: 1rem;
+  cursor: text;
+  top: 20px;
 }
-.footer .social * {
-  margin-right: 32px;
-  cursor: pointer;
+.container .send-message .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+.container .send-message .form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image-slice: 1;
+}
+.container .send-message .form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0);
+  font-weight: 500;
+}
+.container .send-message .form__field:required, .container .send-message .form__field:invalid {
+  box-shadow: none;
 }
 
 /*# sourceMappingURL=Main.css.map */

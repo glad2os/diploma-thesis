@@ -3,22 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="assets/css/chat.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/Main.css">
 </head>
 <body>
-<div id="messages"></div>
+<div class="nav">
+    <div class="item">
+        <img src="assets/img/Gear-001_3D.svg" alt="">
+    </div>
+</div>
+<div class="info">
 
-<form id="chat-form" action="">
-    <input id="msg" autocomplete="off"/>
-    <button>Send</button>
-</form>
+    <div class="content">
+        <div class="server-info column">
+            <div class="server">Chat -
+                <div class="room">{SERVER}</div>
+            </div>
+            <div class="hrline">
+                <hr>
+            </div>
+            <div class="user-info column">
+                <div class="profile-img">
+                    <img src="assets/img/profile.png" alt="">
+                </div>
+                <div class="nickname">
+                    <div class="login">{LOGIN}</div>
+                </div>
+            </div>
+        </div>
+        <div class="online">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.0/qs.min.js"
-        integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ=="
-        crossorigin="anonymous"></script>
+        </div>
+    </div>
+</div>
+<div class="container column">
+    <div class="msg" id="messages">
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="assets/js/main.js"></script>
+    </div>
+    <div class="send-message">
+        <div class="form__group field">
+            <input type="input" class="form__field" placeholder="Write your message..." name="name" id='name' required />
+            <label for="name" class="form__label">Write your message...</label>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.0/qs.min.js"
+            integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ=="
+            crossorigin="anonymous"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="assets/js/main.js"></script>
+</div>
 </body>
 </html>

@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="assets/css/Main.css">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>diploma</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<div class="languages">
-    <div class="eng">
-        eng
-    </div>
-    <hr>
-    <div class="ru">
-        ru
-    </div>
-</div>
-
-<div class="header">
-    <div class="logo">
-        <img src="assets/img/logo.png" alt="">
-        <div class="title">
-            WTChat
+    <header style="margin-bottom: 15px;margin-top: 15px;">
+        <div class="container">
+            <ul class="nav nav-tabs" style="border-bottom-style: none;">
+                <li class="nav-item"><img src="assets/img/logo.png" style="transform: translate(0px) rotate(0deg);text-align: center;width: 100px;"></li>
+                <li class="nav-item">
+                    <h1 style="margin-right: 5px;margin-left: 5px;font-family: Abel, sans-serif;">WTChat</h1>
+                </li>
+                <li class="nav-item" style="font-family: Abel, sans-serif;"><a class="nav-link" href="#" style="color: var(--bs-blue);font-family: Abel, sans-serif;">О нас</a></li>
+                <li class="nav-item" style="font-family: Abel, sans-serif;"><a class="nav-link" href="#" style="color: var(--bs-blue);font-family: Abel, sans-serif;">Собственный сервер</a></li>
+                <li class="nav-item" style="font-family: Abel, sans-serif;"><a class="nav-link" href="#" style="font-family: Abel, sans-serif;">Безопасность</a></li>
+                <li class="nav-item" style="font-family: Abel, sans-serif;"><a class="nav-link" href="#" style="font-family: Abel, sans-serif;">Тех поддержка</a></li>
+            </ul>
         </div>
+    </header>
+    <div class="container">
+        <section class="register-photo">
+            <div class="form-container">
+                <div class="image-holder"></div>
+                <form method="post">
+                    <h2 class="text-center">Автоматизированная система общения для вашего бизнеса<br></h2>
+                    <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Логин"></div>
+                    <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Пароль"></div>
+                    <div class="mb-3"><input class="form-control" type="password" name="password-repeat" placeholder="Пароль (повторите)"></div>
+                    <div class="mb-3">
+                        <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox">Я согласен с правилами</label></div>
+                    </div>
+                    <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Авторизация</button></div><a class="already" href="#">Нет аккаунта?</a>
+                </form>
+            </div>
+        </section>
     </div>
-    <div class="navbar">
-        <div class="item">О нас</div>
-        <div class="item">Собственный сервер</div>
-        <div class="item">Безопасность</div>
-        <div class="item">Тех поддержка</div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="text">
-        Автоматизированная система общения для вашего бизнеса
-    </div>
-    <div class="form">
-        <div class="text">
-            Авторизация
-        </div>
-        <div class="form-btn">
-            <input type="text" placeholder="логин"><input placeholder="пароль" type="password">
-        </div>
-    </div>
-</div>
-
-<div class="footer">
-    <div class="author">
-        Руслан, Ибрагимов, диплом АКВТ, (C) 2021
-    </div>
-    <div class="social">
-        <div class="item">VK</div>
-        <hr>
-        <div class="item">GITHUB</div>
-    </div>
-</div>
+    <footer class="footer-basic">
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">О нас</a></li>
+            <li class="list-inline-item"><a href="#">Собственный сервер</a></li>
+            <li class="list-inline-item"><a href="#">Безопасность</a></li>
+            <li class="list-inline-item"><a href="#">Тех поддержка</a></li>
+            <li class="list-inline-item"></li>
+        </ul>
+        <p class="copyright">Ибрагимов Руслан © 2021</p>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

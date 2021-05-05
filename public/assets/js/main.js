@@ -1,4 +1,4 @@
-const chatForm = document.getElementById('chat-form');
+const chatForm = document.getElementById('name');
 const messages = document.getElementById('messages');
 
 const socket = io();
@@ -31,13 +31,15 @@ socket.on('message', message => {
 });
 
 //Message submit
-chatForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const msg = e.target.elements.msg.value;
+chatForm.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        const msg = e.target.value;
 
-    socket.emit('chatMessage', msg);
-    e.target.elements.msg.value = "";
-    e.target.elements.msg.focus();
+        socket.emit('chatMessage', msg);
+        e.target.value = "";
+        e.target.focus();
+    }
 });
 
 socket.on('disconnect', () => {
