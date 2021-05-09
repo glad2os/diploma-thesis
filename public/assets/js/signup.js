@@ -13,7 +13,7 @@ async function getJson(data = {}) {
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
-    return response.json();
+    return response;
 }
 
 function signup(event, btn) {
@@ -30,11 +30,11 @@ function signup(event, btn) {
     getJson({
         "username": inputs[0].value,
         "password": inputs[1].value
-    }).then(data => {
-        if (data.statusCode === 200) {
+    }).then(resp => {
+        if (resp.status === 200) {
             window.location.href = '/server_list.html';
         } else {
-            alert(data.error);
+            alert(resp.json().error);
         }
     });
 }
