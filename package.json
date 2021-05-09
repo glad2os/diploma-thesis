@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "md5": "^2.3.0",
     "moment": "^2.29.1",
     "socket.io": "^4.0.0",
     "sqlite3": "^5.0.2"
