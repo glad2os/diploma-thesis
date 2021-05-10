@@ -43,7 +43,7 @@ app.get('/chat', function (req, res) {
             res.end();
             return;
         }
-        
+
         res.render('chat.ejs', {
             'username': req.session.username,
             'room': req.query.server,

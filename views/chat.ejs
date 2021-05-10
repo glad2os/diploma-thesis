@@ -8,7 +8,7 @@
 <body>
 <div class="nav">
     <div class="item">
-        <img src="<%= server_img %>" alt="">
+        <img src="/assets/img/Gear-001_3D.svg" alt="">
     </div>
 </div>
 <div class="info">
@@ -16,17 +16,17 @@
     <div class="content">
         <div class="server-info column">
             <div class="server">Chat -
-                <div class="room">{SERVER}</div>
+                <div class="room"><%= room %></div>
             </div>
             <div class="hrline">
                 <hr>
             </div>
             <div class="user-info column">
                 <div class="profile-img">
-                    <img src="assets/img/profile.png" alt="">
+                    <img src="<%= server_img %>" alt="">
                 </div>
                 <div class="nickname">
-                    <div class="login">{LOGIN}</div>
+                    <div class="login"><%= username %></div>
                 </div>
             </div>
         </div>
