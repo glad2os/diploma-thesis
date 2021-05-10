@@ -17,7 +17,7 @@ jobs:
 
       - name: Building Docker Image
         run: |
-          cd /home/ubuntu/actions-runner/_work/diploma/diploma
+          cd /home/ubuntu/actions-runner/_work/diploma-thesis/diploma-thesis
           docker build -t gladdos/wtchat .
 
       - name: Running Docker Image
