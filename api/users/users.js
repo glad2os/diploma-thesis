@@ -28,6 +28,28 @@ function getSession() {
     return _session;
 }
 
+function getServerImg(name, callback) {
+    let sql = 'SELECT img_path from servers where name = ?';
+
+    db.get(sql, name, (err, response) => {
+        if (err) {
+            throw err;
+        }
+        return callback(response);
+    });
+}
+
+function getAvailableServers(username, callback) {
+    let sql = 'SELECT name, img_path from servers inner join users_server_list usl on servers.id = usl.server_id inner join users u on u.id = usl.user_id where u.username=?';
+
+    db.all(sql, username, (err, response) => {
+        if (err) {
+            throw err;
+        }
+        return callback(response);
+    });
+}
+
 app.post('/signin', function (req, res) {
     if (req.session.login) {
         res.statusCode = 403;
@@ -71,5 +93,7 @@ app.post('/signin', function (req, res) {
 module.exports = {
     app,
     setDb,
-    getSession
+    getSession,
+    getAvailableServers,
+    getServerImg
 }

@@ -8,7 +8,7 @@
 <body>
 <div class="nav">
     <div class="item">
-        <img src="assets/img/Gear-001_3D.svg" alt="">
+        <img src="<%= server_img %>" alt="">
     </div>
 </div>
 <div class="info">
@@ -41,7 +41,7 @@
     </div>
     <div class="send-message">
         <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Write your message..." name="name" id='name' required />
+            <input type="input" class="form__field" placeholder="Write your message..." name="name" id='name' required/>
             <label for="name" class="form__label">Write your message...</label>
         </div>
     </div>
@@ -51,7 +51,7 @@
             crossorigin="anonymous"></script>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="assets/js/main.js"></script>
+    <%- include('./js-render/main') -%>
 </div>
 </body>
 </html>

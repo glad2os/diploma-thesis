@@ -14,38 +14,44 @@
 </head>
 
 <body>
-    <header style="margin-bottom: 15px;margin-top: 15px;">
-        <div class="container">
-            <ul class="nav nav-tabs" style="border-bottom-style: none;">
-                <li class="nav-item"><img src="assets/img/logo.png" style="transform: translate(0px) rotate(0deg);text-align: center;width: 100px;"></li>
-                <li class="nav-item">
-                    <h1 style="margin-right: 5px;margin-left: 5px;font-family: Abel, sans-serif;">WTChat</h1>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <div class="container" style="display: flex;flex: 1;">
-        <section class="register-photo" style="display: flex;flex: 1;">
-            <div class="form-container">
-                <form method="post">
-                    <h2 class="text-center">Добро пожаловать <%= username %></h2>
-                    <div class="mb-3"><select class="form-select">
-                            <optgroup label="This is a group">
-                                <option value="12" selected="">This is item 1</option>
-                                <option value="13">This is item 2</option>
-                                <option value="14">This is item 3</option>
-                            </optgroup>
-                        </select></div>
-                    <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Авторизация</button></div>
-                </form>
-            </div>
-        </section>
+<header style="margin-bottom: 15px;margin-top: 15px;">
+    <div class="container">
+        <ul class="nav nav-tabs" style="border-bottom-style: none;">
+            <li class="nav-item"><img src="assets/img/logo.png"
+                                      style="transform: translate(0px) rotate(0deg);text-align: center;width: 100px;">
+            </li>
+            <li class="nav-item">
+                <h1 style="margin-right: 5px;margin-left: 5px;font-family: Abel, sans-serif;">WTChat</h1>
+            </li>
+        </ul>
     </div>
-    <footer class="footer-basic">
-        <p class="copyright">Ибрагимов Руслан © 2021</p>
-    </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</header>
+<div class="container" style="display: flex;flex: 1;">
+    <section class="register-photo" style="display: flex;flex: 1;">
+        <div class="form-container">
+            <form method="get" action="/chat">
+                <h2 class="text-center">Добро пожаловать <%= username %></h2>
+                <div class="mb-3"><select class="form-select" name="server">
+                        <optgroup label="Список доступных серверов">
+                            <% if (typeof (servers) !== 'undefined') { %>
+                                <% servers.forEach(function (server) { %>
+                                    <option value="<%= server.name %>"><%= server.name %></option>
+                                <% }) %>
+                            <% } %>
+                        </optgroup>
+                    </select></div>
+                <div class="mb-3">
+                    <button class="btn btn-primary d-block w-100" type="submit">Вход</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<footer class="footer-basic">
+    <p class="copyright">Ибрагимов Руслан © 2021</p>
+</footer>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
