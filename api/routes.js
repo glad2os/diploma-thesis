@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use("/user", users.app);
 
+function getSession() {
+    return users.getSession();
+}
+
 app.get('/', function (req, res) {
     res.json({
         'author': "glad2os",
@@ -19,4 +23,4 @@ app.get('/', function (req, res) {
 });
 
 
-module.exports = app
+module.exports = {app, getSession}

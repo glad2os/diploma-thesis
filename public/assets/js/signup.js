@@ -32,7 +32,7 @@ function signup(event, btn) {
         "password": inputs[1].value
     }).then(resp => {
         if (resp.status === 200) {
-            window.location.href = '/server_list.html';
+            window.location.href = '/server';
         } else {
             alert(resp.json().error);
         }

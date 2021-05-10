@@ -20,8 +20,13 @@ function generateToken(length) {
     return result;
 }
 
+let _session = session({secret: "set", saveUninitialized: true, resave: true, cookie: {maxAge: 604800000}});
 //TODO: поменять ключ
-app.use(session({secret: generateToken(32), cookie: {maxAge: 604800000}})) // 1 week
+app.use(_session) // 1 week
+
+function getSession() {
+    return _session;
+}
 
 app.post('/signin', function (req, res) {
     if (req.session.login) {
@@ -58,12 +63,13 @@ app.post('/signin', function (req, res) {
             return;
         }
 
-        req.session.login = req.body.username;
+        req.session.username = req.body.username;
         res.end()
     });
 });
 
 module.exports = {
     app,
-    setDb
+    setDb,
+    getSession
 }

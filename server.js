@@ -1,11 +1,15 @@
 const path = require("path");
 const http = require("http");
-const express = require('express');
+let express = require('express');
 const socketio = require('socket.io');
 
 const api = require('./api/routes')
+const view = require('./viewPages')
 
-const app = express();
+let app = express();
+
+app.set('view engine', 'ejs');
+
 const server = http.createServer(app);
 const io = socketio(server);
 
@@ -22,9 +26,11 @@ io.on('connection', socket => {
     require('./socketio/disconnect')(io, socket);
 });
 
-const PORT = typeof process.env.WEB_PORT === 'undefined' ? 8080 : process.env.WEB_PORT
+const PORT = typeof process.env.WEB_PORT === 'undefined' ? 8080 : process.env.WEB_PORT;
 
-app.use('/api', api);
+app.use(api.getSession());
+app.use('/api', api.app);
+app.use('/', view);
 
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
