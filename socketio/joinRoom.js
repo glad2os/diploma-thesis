@@ -6,7 +6,7 @@ module.exports = function(io,socket) {
         const user = userJoin(socket.id, username, room);
         socket.join(user.room);
 
-        socket.emit('message', formatMessage('System', 'Welcome to CUM ZONE'));
+        socket.emit('message', formatMessage('System', 'Welcome to chat ZONE'));
 
         //Broadcast when a user connects
         socket.broadcast
