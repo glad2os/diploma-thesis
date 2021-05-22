@@ -95,7 +95,6 @@ app.post('/signin', function (req, res) {
  * ADMIN API
  *
  */
-
 const ADMIN_PASSWORD = typeof process.env.ADMIN_PASSWORD === 'undefined' ? "test" : process.env.ADMIN_PASSWORD;
 
 app.post('/reguser', function (req, res) {
@@ -129,6 +128,27 @@ app.post('/reguser', function (req, res) {
                 }
             );
         }
+        res.end();
+    });
+});
+
+app.post('/getAvailableServers', function (req, res) {
+    getAvailableServers(req.body.username, (value) => {
+        res.json(value);
+    });
+});
+
+app.post('/getCountUsers', function (req, res) {
+    let sql = `select count(*) as count from users`;
+    db.all(sql, [], (err, data) => {
+        if (err) {
+            res.json(
+                {
+                    "error": err
+                }
+            );
+        }
+        res.json(data[0]);
         res.end();
     });
 });
