@@ -3,6 +3,10 @@ const express = require('express');
 let app = express.Router();
 let usersApi = require('./api/users/users')
 
+
+const adminPage = require('./admin/admin');
+app.use('/admin', adminPage.app);
+
 //TODO: авторизация
 app.get('/server', function (req, res) {
     if (req.session.username === undefined || req.session.username === "") {
@@ -29,6 +33,7 @@ app.get('/', function (req, res) {
     }
 });
 
+
 app.get('/chat', function (req, res) {
 
     if (req.session.username === "" || req.session.username === undefined || req.query.server === undefined) {
@@ -51,7 +56,7 @@ app.get('/chat', function (req, res) {
         });
     });
 
-
 });
+
 
 module.exports = app

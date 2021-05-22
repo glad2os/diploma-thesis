@@ -1,6 +1,8 @@
 const {userJoin, getRoomUsers} = require('../utils/users');
 const formatMessage = require('../utils/messages');
 
+//TODO: аутентификация
+
 module.exports = function(io,socket) {
     socket.on('joinRoom', ({username, room}) => {
         const user = userJoin(socket.id, username, room);

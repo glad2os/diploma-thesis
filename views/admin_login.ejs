@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>admin</title>
+    <link rel="stylesheet" href="/assets/admin-css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/Newsletter-Subscription-Form.css">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>Администрационная панель</h1>
+        <p>Введите заданный пароль системного администратора на уровне создания контейнера</p>
+        <p><a class="btn btn-primary" role="button">Как это сделать?</a></p>
+    </div>
+    <div class="container">
+        <section class="newsletter-subscribe">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Вход в панель администратора</h2>
+                    <p class="text-center">Неудачная или несанкционированная попытка входа в систему будет зафиксирована в лог-файле. Свяжитесь с системным администратором для прочтения лог-файла</p>
+                </div>
+                <form action="/admin" class="form-inline" method="get">
+                    <input class="form-control" type="password" name="password" placeholder="password">
+                    <button class="btn btn-primary" type="submit">Войти</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script src="/assets/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -90,6 +90,81 @@ app.post('/signin', function (req, res) {
     });
 });
 
+
+/*
+ * ADMIN API
+ *
+ */
+
+const ADMIN_PASSWORD = typeof process.env.ADMIN_PASSWORD === 'undefined' ? "test" : process.env.ADMIN_PASSWORD;
+
+app.post('/reguser', function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+
+    if (typeof req.body.username === "undefined" || typeof req.body.password === "undefined") {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Лимиты не заданы"
+            }
+        );
+        return;
+    }
+
+    let sql = `insert into users  (username,password_hash) values (?,?)`;
+
+    db.get(sql, req.body.username, md5(req.body.password), (err) => {
+        if (err) {
+            res.json(
+                {
+                    "error": err
+                }
+            );
+        }
+        res.end();
+    });
+});
+
+app.post('/get-all', function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+
+    if (typeof req.body.limit === "undefined" || typeof req.body.amount === "undefined") {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Лимиты не заданы"
+            }
+        );
+        return;
+    }
+
+    let sql = `select * from users  ORDER BY id limit ?, ?`;
+
+    db.all(sql, req.body.limit, req.body.amount, (err, rows) => {
+        if (err) {
+            res.json(
+                {"error": err});
+        }
+        res.json(rows);
+    });
+});
+
 module.exports = {
     app,
     setDb,
