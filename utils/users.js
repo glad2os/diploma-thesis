@@ -25,6 +25,15 @@ function userLeave(id) {
     }
 }
 
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+
+function getUniqRoomUsers(room) {
+    return users.filter(user => user.room === room).map(user => user.username).filter(onlyUnique);
+}
+
 // Get room users
 function getRoomUsers(room) {
     return users.filter(user => user.room === room);
@@ -35,5 +44,6 @@ module.exports = {
     getCurrentUser,
     userLeave,
     getRoomUsers,
-    isUserOnline
+    isUserOnline,
+    getUniqRoomUsers
 };

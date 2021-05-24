@@ -1,4 +1,4 @@
-const {getRoomUsers, userLeave} = require('../utils/users');
+const {isUserOnline, userLeave, getUniqRoomUsers} = require('../utils/users');
 const formatMessage = require('../utils/messages');
 
 module.exports = function (io, socket) {
@@ -7,9 +7,10 @@ module.exports = function (io, socket) {
         if (user) {
             io.to(user.room).emit('roomUsers', {
                 room: user.room,
-                users: getRoomUsers(user.room)
+                users: getUniqRoomUsers(user.room)
             });
-            io.to(user.room).emit('message', formatMessage('System', `A ${user.username} has left the chat`));
+            if (!isUserOnline(user.username))
+                io.to(user.room).emit('message', formatMessage('System', `A ${user.username} has left the chat`));
         }
     });
 }
