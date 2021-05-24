@@ -53,4 +53,35 @@
         window.location.href = '/';
     });
 
+    let firstId = 0;
+
+    function getOldMessages() {
+        socket.emit("getOldMessages", firstId)
+    }
+
+    messages.onscroll = _ => {
+        if (firstId !== 0 && messages.scrollTop < 20) {
+            getOldMessages();
+        }
+    }
+
+    socket.on("messages", (arrayMessages) => {
+        let newFirstId = arrayMessages[0].id;
+        let diff = messages.scrollHeight - messages.scrollTop;
+
+        arrayMessages.reverse().forEach(value => {
+            messages.insertAdjacentHTML("afterbegin", `
+    <div class="message">
+    <div class="username">${value.username}</div>
+    <div class="time">${value.time}</div>
+    <div class="text">${value.message}</div>
+</div>
+    `);
+        });
+        if (firstId === 0) messages.scrollTop = messages.scrollHeight;
+        else messages.scrollTop = messages.scrollHeight - diff;
+        firstId = newFirstId;
+    });
+
+
 </script>

@@ -38,8 +38,32 @@ async function addMessage(server_id, message, user_id) {
     await db.run(sql, server_id, message, user_id);
 }
 
+
+async function getMessages(server_id, offset, limit) {
+
+    const db = await createDbConnection('./wtchat.db');
+
+    let sql = "select sm.id, sm.message, sm.time, u.username from servers_messages sm inner join users u on u.id = sm.user_id where server_id = ? ORDER BY sm.id limit ?, ?;";
+    return await db.all(sql, server_id, offset, limit);
+}
+
+
+async function getLastMessages(server_id) {
+
+    const db = await createDbConnection('./wtchat.db');
+
+    let sql = "select sm.id, sm.message, sm.time, u.username from servers_messages sm inner join users u on u.id = sm.user_id where sm.server_id = ? ORDER BY sm.id limit (select count(*)-50 from servers_messages sm1 where sm1.server_id = ?), 50;";
+    let rows = await db.all(sql, server_id, server_id);
+
+    if (typeof rows === "undefined") return undefined;
+
+    return rows;
+}
+
 module.exports = {
     getServerIdByName,
     getUserIdByUsername,
-    addMessage
+    addMessage,
+    getMessages,
+    getLastMessages
 }
