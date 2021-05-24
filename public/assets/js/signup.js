@@ -3,12 +3,8 @@ let inputs = document.querySelectorAll('input');
 function signup(event, btn) {
     event.preventDefault();
 
-    if (inputs[0].value.length < 3 || inputs[1].value.length < 5 || inputs[2].value.length < 5 || !inputs[3].checked) {
+    if (inputs[0].value.length < 3 || inputs[1].value.length < 5) {
         alert("Поля не введены!");
-        return;
-    }
-
-    if (inputs[1].value.length < 5 !== inputs[2].value.length < 5) {
         return;
     }
 
@@ -19,7 +15,7 @@ function signup(event, btn) {
         if (resp.status === 200) {
             window.location.href = '/server';
         } else {
-            alert(resp.json().error);
+            resp.json().then(r => alert(r.error));
         }
     });
 }

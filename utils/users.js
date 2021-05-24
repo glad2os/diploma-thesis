@@ -13,6 +13,10 @@ function getCurrentUser(id) {
     return users.find(user => user.id === id);
 }
 
+function isUserOnline(username) {
+    return users.find(user => user.username === username) !== undefined;
+}
+
 // User leaves chat
 function userLeave(id) {
     const index = users.findIndex(user => user.id === id);
@@ -30,5 +34,6 @@ module.exports = {
     userJoin,
     getCurrentUser,
     userLeave,
-    getRoomUsers
+    getRoomUsers,
+    isUserOnline
 };

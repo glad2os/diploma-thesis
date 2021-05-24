@@ -1,23 +1,30 @@
 <script>
     const chatForm = document.getElementById('name');
     const messages = document.getElementById('messages');
+    const online = document.querySelector('.online');
 
     const socket = io();
 
     const username = "<%= username %>";
     const room = "<%= room %>";
 
-        // join chat room
-        socket.emit('joinRoom', {
-            username, room
-        });
+    // join chat room
+    socket.emit('joinRoom', {
+        username, room
+    });
 
     //Get room & users
     socket.on('roomUsers', ({room, users}) => {
         //TODO: Front-end part
-        console.log(room);
         console.log(users);
-    })
+        online.innerHTML = "";
+        let ul = document.createElement("ul");
+
+        for (let i = 0; i < users.length; i++) {
+            ul.insertAdjacentHTML("beforeend", `<li>${users[i].username}</li>`);
+        }
+        online.appendChild(ul);
+    });
 
     socket.on('message', message => {
         messages.insertAdjacentHTML("beforeend", `

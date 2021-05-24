@@ -36,6 +36,24 @@ app.get('/reguser', function (req, res) {
     res.end();
 });
 
+app.get('/edituser', function (req, res) {
+    if (typeof req.query.username === "undefined") {
+        res.end();
+        return;
+    }
+
+    if (req.session.adminPass === ADMIN_PASSWORD) {
+        res.render("admin-view/edituser", {
+            "username": req.query.username
+        });
+        res.end();
+        return;
+    } else {
+        res.send("403 access forbidden");
+    }
+    res.end();
+});
+
 app.get('/users', function (req, res) {
     if (req.session.adminPass === ADMIN_PASSWORD) {
         res.render("admin-view/users");

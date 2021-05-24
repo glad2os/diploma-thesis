@@ -64,6 +64,11 @@ function reg_user() {
                 edit.appendChild(editIcon);
                 remove.appendChild(removeIcon);
 
+
+                edit.onclick = function () {
+                    window.location.href = "/admin/edituser?username=" + value[i].username;
+                }
+
                 tr.appendChild(id);
                 tr.appendChild(login);
                 tr.appendChild(av_server);
@@ -88,7 +93,7 @@ function prevPage() {
 
 function nextPage() {
     countUsers().then(response => response.json()).then(value => {
-        if(limit +5 <= value.count){
+        if (limit + 5 <= value.count) {
             tbody.innerHTML = "";
             limit += 5;
             reg_user();
