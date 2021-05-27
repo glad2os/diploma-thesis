@@ -149,6 +149,23 @@ body {
     word-wrap: break-word;
 
     .message {
+      span {
+        background-color: wheat;
+      }
+
+      .h {
+        display: flex;
+
+        .username {
+          margin-right: 15px;
+
+          &:hover {
+            color: #2d2d2d;
+            cursor: pointer;
+          }
+        }
+      }
+
       .text {
         word-wrap: anywhere;
       }

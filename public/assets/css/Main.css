@@ -126,6 +126,19 @@ body {
   overflow-y: auto;
   word-wrap: break-word;
 }
+.container .msg .message span {
+  background-color: wheat;
+}
+.container .msg .message .h {
+  display: flex;
+}
+.container .msg .message .h .username {
+  margin-right: 15px;
+}
+.container .msg .message .h .username:hover {
+  color: #2d2d2d;
+  cursor: pointer;
+}
 .container .msg .message .text {
   word-wrap: anywhere;
 }

@@ -12,7 +12,6 @@
     </div>
 </div>
 <div class="info">
-
     <div class="content">
         <div class="server-info column">
             <div class="server">Chat -
@@ -39,6 +38,7 @@
     <div class="msg" id="messages">
 
     </div>
+
     <div class="send-message">
         <div class="form__group field">
             <input type="input" class="form__field" placeholder="Write your message..." name="name" id='name' required/>
@@ -51,6 +51,8 @@
             crossorigin="anonymous"></script>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/assets/drop-zone/dropzone.js"></script>
+    <script src="/assets/js/dragndrop.js"></script>
     <%- include('./js-render/main') -%>
 </div>
 </body>

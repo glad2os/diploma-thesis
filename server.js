@@ -24,6 +24,9 @@ io.on('connection', socket => {
 
     //Disconnect Event
     require('./socketio/disconnect')(io, socket);
+
+    //Send file Event
+    require('./socketio/files')(io, socket);
 });
 
 const PORT = typeof process.env.WEB_PORT === 'undefined' ? 8080 : process.env.WEB_PORT;

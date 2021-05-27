@@ -15,8 +15,6 @@
 
     //Get room & users
     socket.on('roomUsers', ({room, users}) => {
-        //TODO: Front-end part
-        console.log(users);
         online.innerHTML = "";
         let ul = document.createElement("ul");
 
@@ -27,13 +25,39 @@
     });
 
     socket.on('message', message => {
-        messages.insertAdjacentHTML("beforeend", `
+        let msg_parse = message.text.split(/\s+/g);
+        if (msg_parse[0][0] === "@") {
+            let content = msg_parse.slice(msg_parse.length - 1);
+            let msg = "";
+            for (let i = 0; i < msg_parse.length - 1; i++) {
+                if (msg_parse[i].substring(1) === username) {
+                    msg += `<span>${msg_parse[i]} </span>`;
+                } else {
+                    msg += msg_parse[i] + " ";
+                }
+            }
+            msg += content;
+            messages.insertAdjacentHTML("beforeend", `
     <div class="message">
-    <div class="username">${message.username}</div>
+    <div class="h">
+    <div class="username" onclick="appendText('@${message.username}')">${message.username}</div>
     <div class="time">${message.time}</div>
+    </div>
+    <div class="text">${msg}</div>
+</div>
+    `);
+        } else {
+            messages.insertAdjacentHTML("beforeend", `
+    <div class="message">
+    <div class="h">
+    <div class="username" onclick="appendText('@${message.username}')">${message.username}</div>
+    <div class="time">${message.time}</div>
+    </div>
     <div class="text">${message.text}</div>
 </div>
     `);
+        }
+
         messages.scrollTop = messages.scrollHeight
     });
 
@@ -42,7 +66,6 @@
         if (e.keyCode === 13) {
             e.preventDefault();
             const msg = e.target.value;
-
             socket.emit('chatMessage', msg);
             e.target.value = "";
             e.target.focus();
@@ -70,18 +93,53 @@
         let diff = messages.scrollHeight - messages.scrollTop;
 
         arrayMessages.reverse().forEach(value => {
-            messages.insertAdjacentHTML("afterbegin", `
+
+            let msg_parse = value.message.split(/\s+/g);
+            if (msg_parse[0][0] === "@") {
+                let content = msg_parse.slice(msg_parse.length - 1);
+                let msg = "";
+                for (let i = 0; i < msg_parse.length - 1; i++) {
+                    if (msg_parse[i].substring(1) === username) {
+                        msg += `<span>${msg_parse[i]} </span>`;
+                    } else {
+                        msg += msg_parse[i] + " ";
+                    }
+                }
+                msg += content;
+
+                messages.insertAdjacentHTML("afterbegin", `
     <div class="message">
-    <div class="username">${value.username}</div>
+    <div class="h">
+    <div class="username" onclick="appendText('@${value.username}')">${value.username}</div>
     <div class="time">${value.time}</div>
+    </div>
+
+    <div class="text">${msg}</div>
+</div>
+    `);
+            } else {
+
+
+                messages.insertAdjacentHTML("afterbegin", `
+    <div class="message">
+    <div class="h">
+    <div class="username" onclick="appendText('@${value.username}')">${value.username}</div>
+    <div class="time">${value.time}</div>
+    </div>
+
     <div class="text">${value.message}</div>
 </div>
     `);
+            }
+
         });
         if (firstId === 0) messages.scrollTop = messages.scrollHeight;
         else messages.scrollTop = messages.scrollHeight - diff;
         firstId = newFirstId;
     });
 
-
+    function appendText(text) {
+        document.getElementById("name").value += text + " ";
+        document.getElementById("name").focus();
+    }
 </script>
