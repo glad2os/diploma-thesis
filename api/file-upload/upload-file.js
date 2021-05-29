@@ -10,7 +10,12 @@ let app = express.Router();
 const fileupload = require("express-fileupload");
 app.use(fileupload());
 
+app.get("/getfile/:fileId", function (req, res) {
+    res.send(req.params)
+});
+
 app.post('/', function (req, res) {
+    //todo: check user
     let newPath = __dirname + "../../../uploads/";
     let array = Object.values(req.files);
     array.forEach(value => {
