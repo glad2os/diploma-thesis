@@ -4,13 +4,17 @@ const sqlite3 = require('sqlite3').verbose();
 let db = new sqlite3.Database('./wtchat.db');
 let app = express.Router();
 
-const users = require('./users/users')
-const uploadfile = require('./file-upload/upload-file')
+const users = require('./users/users');
+const servers = require('./servers/servers');
+const uploadfile = require('./file-upload/upload-file');
+
+servers.setDb(db);
 users.setDb(db);
 
 app.use(express.json());
 
 app.use("/user", users.app);
+app.use("/servers", servers.app);
 app.use("/uploadfile", uploadfile.app);
 
 function getSession() {

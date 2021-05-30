@@ -65,4 +65,16 @@ app.get('/users', function (req, res) {
     res.end();
 });
 
+app.get('/servers', function (req, res) {
+    if (req.session.adminPass === ADMIN_PASSWORD) {
+        res.render("admin-view/servers");
+        res.end();
+        return;
+    } else {
+        res.send("403 access forbidden");
+    }
+    res.end();
+});
+
+
 module.exports = {app}
