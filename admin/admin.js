@@ -9,16 +9,19 @@ const ADMIN_PASSWORD = typeof process.env.ADMIN_PASSWORD === 'undefined' ? "test
 app.use(express.static(path.join(__dirname, '../view/admin-view/admin-assets/')));
 
 app.get('/', function (req, res) {
-    //TODO: проверить на пользователя
-
     if (req.session.adminPass === ADMIN_PASSWORD) {
-        res.render("admin-view/index");
+        res.render("admin-view/index", {
+            "username": req.session.username === undefined ? "root" : req.session.username
+        });
         res.end();
         return;
     }
     if (typeof req.query.password !== undefined && req.query.password === ADMIN_PASSWORD) {
         req.session.adminPass = ADMIN_PASSWORD;
-        res.render("admin-view/index");
+        console.log(req.session.username);
+        res.render("admin-view/index", {
+            "username": req.session.username === undefined ? "root" : req.session.username
+        });
     } else {
         res.render("admin_login");
     }
@@ -27,7 +30,9 @@ app.get('/', function (req, res) {
 
 app.get('/reguser', function (req, res) {
     if (req.session.adminPass === ADMIN_PASSWORD) {
-        res.render("admin-view/register");
+        res.render("admin-view/register", {
+            "username": req.session.username === undefined ? "root" : req.session.username
+        });
         res.end();
         return;
     } else {
@@ -56,7 +61,9 @@ app.get('/edituser', function (req, res) {
 
 app.get('/users', function (req, res) {
     if (req.session.adminPass === ADMIN_PASSWORD) {
-        res.render("admin-view/users");
+        res.render("admin-view/users", {
+            "username": req.session.username === undefined ? "root" : req.session.username
+        });
         res.end();
         return;
     } else {
@@ -67,7 +74,9 @@ app.get('/users', function (req, res) {
 
 app.get('/servers', function (req, res) {
     if (req.session.adminPass === ADMIN_PASSWORD) {
-        res.render("admin-view/servers");
+        res.render("admin-view/servers", {
+            "username": req.session.username === undefined ? "root" : req.session.username
+        });
         res.end();
         return;
     } else {

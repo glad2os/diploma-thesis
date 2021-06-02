@@ -3,8 +3,6 @@ const tbody = document.getElementById('tbody');
 let limit = 0;
 let amount = 5;
 
-// getJson("", "").then(response => console.log(response));
-
 async function countUsers() {
     return await fetch('/api/user/getCountUsers', {
         method: 'POST',
@@ -23,11 +21,9 @@ function updateStatusLabel() {
     countUsers().then(response => response.json()).then(value => {
         document.getElementById("dataTable_info").innerText = "Showing " + limit + " to 10 of " + value.count;
     });
-
 }
 
-
-function reg_user() {
+function get_all() {
     getJson("user/get-all", {
         "limit": limit,
         "amount": amount,
@@ -86,7 +82,7 @@ function prevPage() {
     if (limit - 5 >= 0) {
         tbody.innerHTML = "";
         limit -= 5;
-        reg_user();
+        get_all();
         updateStatusLabel();
     }
 }
@@ -96,11 +92,11 @@ function nextPage() {
         if (limit + 5 <= value.count) {
             tbody.innerHTML = "";
             limit += 5;
-            reg_user();
+            get_all();
             document.getElementById("dataTable_info").innerText = "Showing " + limit + " to 10 of " + value.count;
         }
     });
 }
 
-reg_user();
+get_all();
 updateStatusLabel();

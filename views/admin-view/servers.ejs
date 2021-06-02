@@ -26,9 +26,9 @@
             <ul class="navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item"><a class="nav-link" href="/admin"><i class="fa fa-server"></i><span>Серверная информация</span></a>
                 </li>
-                <li class="nav-item "><a class="nav-link active" href="/admin/users"><i class="fas fa-user"></i><span>Пользователи</span></a>
+                <li class="nav-item "><a class="nav-link" href="/admin/users"><i class="fas fa-user"></i><span>Пользователи</span></a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/admin/servers"><i
+                <li class="nav-item"><a class="nav-link active" href="/admin/servers"><i
                                 class="fas fa-table"></i><span>Сервера</span></a></li>
                 <li class="nav-item"><a class="nav-link" href="/admin/reguser"><i class="fas fa-user-circle"></i><span>Регистрация пользователя</span></a>
                 </li>
@@ -137,7 +137,7 @@
                             <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                                                        aria-expanded="false" data-toggle="dropdown"
                                                                        href="#"><span
-                                            class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span></a>
+                                            class="d-none d-lg-inline mr-2 text-gray-600 small"><%= username %></span></a>
                                 <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a
                                             class="dropdown-item" href="#"><i
                                                 class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a
@@ -162,22 +162,24 @@
                     </div>
                     <form class="user">
                         <div class="form-group"><input class="form-control form-control-user" type="text"
-                                                       id="exampleInputEmail" aria-describedby="emailHelp"
+                                                       id="serverinput" aria-describedby="emailHelp"
                                                        placeholder="Название" name="name"></div>
                         <div class="form-group">
                             <div id="imgzone" style="border: 4px dotted; height: 160px;">
                                 <div class="dropzone_preview" id="dz-preview">
                                     <div class="dropzone_details">
-                                        <img data-dz-thumbnail />
+                                        <img data-dz-thumbnail/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="progress" style="height: 1px;">
-                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
 
-                        <input style="margin-top: 15px;" value="Регистрация в сети" class="btn btn-primary btn-block text-white btn-user"
+                        <input style="margin-top: 15px;" value="Регистрация в сети"
+                               class="btn btn-primary btn-block text-white btn-user"
                                onclick="upload()">
                     </form>
                 </div>
@@ -250,27 +252,8 @@
 <script src="/assets/js/getJson.js"></script>
 <script src="/admin-assets/js/get-all-servers.js"></script>
 <script src="/assets/drop-zone/dropzone.js"></script>
-<script>
-    let myDropzone = new Dropzone("#imgzone", { // Make the whole body a dropzone
-        url: "/test", // Set the url
-        autoQueue: false,
-        previewTemplate: document.getElementById('dz-preview').innerHTML,
-        acceptedFiles: ".jpeg,.jpg,.png,.gif"
-    });
+<script src="/admin-assets/js/reg-new-server.js"></script>
 
-    myDropzone.on("totaluploadprogress", function(progress) {
-        document.querySelector(".progress-bar").style.width = progress + "%";
-    });
-
-    document.querySelector("#actions .start").onclick = function() {
-        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-    };
-    document.querySelector("#actions .cancel").onclick = function() {
-        myDropzone.removeAllFiles(true);
-    };
-
-    function upload() { myDropzone.enqueueFile(myDropzone.files[0]); };
-</script>
 </body>
 
 </html>

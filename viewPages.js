@@ -7,7 +7,6 @@ let usersApi = require('./api/users/users')
 const adminPage = require('./admin/admin');
 app.use('/admin', adminPage.app);
 
-//TODO: авторизация
 app.get('/server', function (req, res) {
     if (req.session.username === undefined || req.session.username === "") {
         res.redirect('/');

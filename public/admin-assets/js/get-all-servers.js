@@ -23,58 +23,64 @@ function updateStatusLabel() {
     });
 }
 
-function reg_user() {
+function get_all() {
     getJson("servers/get-all", {
         "limit": limit,
         "amount": amount,
     }).then(response => response.json()).then(value => {
-        if (typeof value.error === "undefined") {
-            for (let i = 0; i < value.length; i++) {
-                let tr = document.createElement('tr');
-                let id = document.createElement('td');
-                let name = document.createElement('td');
-                let img_path = document.createElement('td');
-                let edit = document.createElement('td');
-                let remove = document.createElement('td');
+            if (typeof value.error === "undefined") {
+                for (let i = 0; i < value.length; i++) {
+                    let tr = document.createElement('tr');
+                    let id = document.createElement('td');
+                    let name = document.createElement('td');
+                    let img_path = document.createElement('td');
+                    let edit = document.createElement('td');
+                    let remove = document.createElement('td');
 
-                id.innerText = value[i].id;
-                name.innerText = value[i].name;
-                img_path.innerHTML = value[i].img_path;
+                    id.innerText = value[i].id;
+                    name.innerText = value[i].name;
+                    img_path.innerHTML = value[i].img_path;
 
-                let editIcon = document.createElement('i');
-                let removeIcon = document.createElement('i');
+                    let editIcon = document.createElement('i');
+                    let removeIcon = document.createElement('i');
 
-                editIcon.classList.add('fas');
-                editIcon.classList.add('fa-user-edit');
+                    editIcon.classList.add('fas');
+                    editIcon.classList.add('fa-user-edit');
 
-                removeIcon.classList.add('fas');
-                removeIcon.classList.add('fa-user-times');
+                    removeIcon.classList.add('fas');
+                    removeIcon.classList.add('fa-user-times');
 
-                edit.appendChild(editIcon);
-                remove.appendChild(removeIcon);
+                    edit.appendChild(editIcon);
+                    remove.appendChild(removeIcon);
 
-                edit.onclick = function () {
-                    window.location.href = "/admin/editserver?id=" + value[i].id;
+                    edit.onclick = function () {
+                        window.location.href = "/admin/editserver?id=" + value[i].id;
+                    }
+
+                    remove.onclick = function () {
+                        getJson('servers/remove/' + value[i].id, {}).then(resp => {
+                            location.reload();
+                        });
+                    }
+                    tr.appendChild(id);
+                    tr.appendChild(name);
+                    tr.appendChild(img_path);
+                    tr.appendChild(edit);
+                    tr.appendChild(remove);
+                    tbody.appendChild(tr);
                 }
-
-                tr.appendChild(id);
-                tr.appendChild(name);
-                tr.appendChild(img_path);
-                tr.appendChild(edit);
-                tr.appendChild(remove);
-                tbody.appendChild(tr);
+            } else {
+                console.log(value.error.code);
             }
-        } else {
-            console.log(value.error.code);
         }
-    });
+    );
 }
 
 function prevPage() {
     if (limit - 5 >= 0) {
         tbody.innerHTML = "";
         limit -= 5;
-        reg_user();
+        get_all();
         updateStatusLabel();
     }
 }
@@ -84,11 +90,11 @@ function nextPage() {
         if (limit + 5 <= value.count) {
             tbody.innerHTML = "";
             limit += 5;
-            reg_user();
+            get_all();
             document.getElementById("dataTable_info").innerText = "Showing " + limit + " to 10 of " + value.count;
         }
     });
 }
 
-reg_user();
+get_all();
 updateStatusLabel();

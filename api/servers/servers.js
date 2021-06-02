@@ -42,6 +42,28 @@ app.post('/get-all', function (req, res) {
     });
 });
 
+app.post("/remove/:id", function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+    let sql = `delete from servers where  id = ?`;
+    db.all(sql, req.params.id, (err, data) => {
+        if (err) {
+            res.json(
+                {
+                    "error": err
+                }
+            );
+        }
+        res.end();
+    });
+});
 
 app.post('/getCountServers', function (req, res) {
     let sql = `select count(*) as count from servers`;
@@ -58,6 +80,31 @@ app.post('/getCountServers', function (req, res) {
     });
 });
 
+app.post('/regServer', function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+    let img_path = "";
+    if (req.body.img_path > 0) img_path = "/assets/img/" + req.body.name;
+
+    let sql = `insert into servers (name, img_path) VALUES (?,?)`;
+    db.all(sql, req.body.name, img_path, (err, data) => {
+        if (err) {
+            res.json(
+                {
+                    "error": err
+                }
+            );
+        }
+        res.end();
+    });
+});
 
 module.exports = {
     app,

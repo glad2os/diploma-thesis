@@ -21,7 +21,6 @@ module.exports = function (io, socket) {
             users: getUniqRoomUsers(room)
         });
         socket.emit('messages', await getLastMessages(await getServerIdByName(room)));
-        //TODO: отправка последних сообщений (50) в комнате.
     });
 
     socket.on('getOldMessages', async firstId => {
