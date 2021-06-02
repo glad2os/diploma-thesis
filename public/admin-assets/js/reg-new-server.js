@@ -9,7 +9,7 @@ myDropzone.on("totaluploadprogress", function (progress) {
     document.querySelector(".progress-bar").style.width = progress + "%";
 });
 
-myDropzone.on("sending", function(file, xhr, formData) {
+myDropzone.on("sending", function (file, xhr, formData) {
     formData.append("filename", document.getElementById("serverinput").value);
 });
 
@@ -26,6 +26,7 @@ function upload() {
                 }
                 get_all();
                 updateStatusLabel();
+                myDropzone.removeAllFiles();
             } else {
                 alert(resp.json().error);
             }

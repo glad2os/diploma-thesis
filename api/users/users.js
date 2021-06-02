@@ -40,7 +40,7 @@ function getServerImg(name, callback) {
 }
 
 function getAvailableServers(username, callback) {
-    let sql = 'SELECT name, img_path from servers inner join users_server_list usl on servers.id = usl.server_id inner join users u on u.id = usl.user_id where u.username=?';
+    let sql = 'SELECT server_id, name, img_path from servers inner join users_server_list usl on servers.id = usl.server_id inner join users u on u.id = usl.user_id where u.username=?';
 
     db.all(sql, username, (err, response) => {
         if (err) {

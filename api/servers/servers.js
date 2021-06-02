@@ -42,6 +42,65 @@ app.post('/get-all', function (req, res) {
     });
 });
 
+app.post('/selectall', function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+
+    let sql = `select * from servers`;
+
+    db.all(sql, req.body.limit, req.body.amount, (err, rows) => {
+        if (err) {
+            res.json(
+                {"error": err});
+        }
+        res.json(rows);
+    });
+});
+app.post('/updatelist', function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+    let sql = `delete from users_server_list where user_id = (select id from users where username = ? )`;
+
+    db.run(sql, req.body.username, (err, data) => {
+        if (err) {
+            res.json(
+                {
+                    "error": err
+                }
+            );
+        }
+    });
+
+
+    sql = `insert into users_server_list (user_id, server_id) values`; // ((select id from users where username = "gladdos"),?)`
+    for (let i = 0; i < req.body.serversids.length; i++) {
+        let prepare = sql + '((select id from users where username = "'+req.body.username+'"),' + req.body.serversids[i] + ")";
+        db.run(prepare, [], (err, data) => {
+            if (err) {
+                res.json(
+                    {
+                        "error": err
+                    }
+                );
+            }
+        });
+    }
+    res.end();
+});
 app.post("/remove/:id", function (req, res) {
     if (req.session.adminPass !== ADMIN_PASSWORD) {
         res.statusCode = 403;

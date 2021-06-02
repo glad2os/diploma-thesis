@@ -18,7 +18,6 @@ app.get('/', function (req, res) {
     }
     if (typeof req.query.password !== undefined && req.query.password === ADMIN_PASSWORD) {
         req.session.adminPass = ADMIN_PASSWORD;
-        console.log(req.session.username);
         res.render("admin-view/index", {
             "username": req.session.username === undefined ? "root" : req.session.username
         });

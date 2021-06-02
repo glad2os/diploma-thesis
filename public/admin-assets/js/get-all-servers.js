@@ -41,21 +41,12 @@ function get_all() {
                     name.innerText = value[i].name;
                     img_path.innerHTML = value[i].img_path;
 
-                    let editIcon = document.createElement('i');
                     let removeIcon = document.createElement('i');
-
-                    editIcon.classList.add('fas');
-                    editIcon.classList.add('fa-user-edit');
 
                     removeIcon.classList.add('fas');
                     removeIcon.classList.add('fa-user-times');
 
-                    edit.appendChild(editIcon);
                     remove.appendChild(removeIcon);
-
-                    edit.onclick = function () {
-                        window.location.href = "/admin/editserver?id=" + value[i].id;
-                    }
 
                     remove.onclick = function () {
                         getJson('servers/remove/' + value[i].id, {}).then(resp => {
@@ -65,7 +56,6 @@ function get_all() {
                     tr.appendChild(id);
                     tr.appendChild(name);
                     tr.appendChild(img_path);
-                    tr.appendChild(edit);
                     tr.appendChild(remove);
                     tbody.appendChild(tr);
                 }
