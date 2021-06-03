@@ -89,6 +89,7 @@
     }
 
     socket.on("messages", (arrayMessages) => {
+        if (arrayMessages.length === 0) return;
         let newFirstId = arrayMessages[0].id;
         let diff = messages.scrollHeight - messages.scrollTop;
 
