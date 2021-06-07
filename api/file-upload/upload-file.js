@@ -42,7 +42,7 @@ app.post('/', function (req, res) {
     let newPath = __dirname + "/../../uploads/";
 
     let array = Object.values(req.files);
-    console.log(newPath);
+
     if (fs.existsSync(newPath)) {
         array.forEach(value => {
             fs.writeFile(newPath + value.name, value.data, function (err) {
