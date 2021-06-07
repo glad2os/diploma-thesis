@@ -32,7 +32,6 @@ app.get('/', function (req, res) {
     }
 });
 
-
 app.get('/chat', function (req, res) {
 
     if (req.session.username === "" || req.session.username === undefined || req.query.server === undefined) {
@@ -54,7 +53,6 @@ app.get('/chat', function (req, res) {
             'server_img': response['img_path']
         });
     });
-
 });
 
 

@@ -84,5 +84,4 @@ app.get('/servers', function (req, res) {
     res.end();
 });
 
-
 module.exports = {app}
