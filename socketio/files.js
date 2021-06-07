@@ -10,7 +10,8 @@ module.exports = function (io, socket) {
         if (user !== undefined) {
             let type = filetype.split("/");
 
-            let dir = __dirname + "../../uploads/";
+            let dir = __dirname + "/../uploads/";
+            console.log(dir);
             if (fs.existsSync(dir)) {
                 if (type[0] === "image") {
                     const contents = fs.readFileSync(dir + filename, {encoding: 'base64'});
@@ -26,6 +27,5 @@ module.exports = function (io, socket) {
                 fs.mkdirSync(dir);
             }
         }
-
     });
 }

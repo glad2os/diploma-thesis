@@ -39,14 +39,17 @@ app.post('/', function (req, res) {
         return;
     }
 
-    let newPath = __dirname + "../../../uploads/";
-    let array = Object.values(req.files);
-    array.forEach(value => {
-        fs.writeFile(newPath + value.name, value.data, function (err) {
-            if (err) res.json(err.message);
-        });
-    });
+    let newPath = __dirname + "/../../uploads/";
 
+    let array = Object.values(req.files);
+    console.log(newPath);
+    if (fs.existsSync(newPath)) {
+        array.forEach(value => {
+            fs.writeFile(newPath + value.name, value.data, function (err) {
+                if (err) res.json(err.message);
+            });
+        });
+    }
     res.end();
 });
 
