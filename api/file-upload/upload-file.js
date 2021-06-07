@@ -29,7 +29,6 @@ app.post('/addServerImg', function (req, res) {
     }
 
     let newPath = __dirname + "/../../public/assets/img/";
-    console.log(newPath);
     let array = Object.values(req.files);
     array.forEach(value => {
         fs.writeFile(newPath + value.name, value.data, function (err) {

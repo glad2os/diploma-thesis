@@ -37,15 +37,17 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-direction: column;
 }
-.nav .item {
+.nav .item :hover {
+  opacity: 0.8;
+}
+.nav .item img {
+  padding-bottom: 15px;
   cursor: pointer;
   display: flex;
   width: 25px;
   height: 25px;
-}
-.nav .item :hover {
-  opacity: 0.8;
 }
 
 .info {
@@ -114,6 +116,21 @@ body {
   margin: 15px 0 15px 0;
   border-top: #dbdbdb solid 1px;
   border-left: #dbdbdb solid 1px;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+.info .content .online .users {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.info .content .online .users p {
+  justify-content: center;
+  display: flex;
+  margin: 15px 0;
+  font-size: 1.1em;
 }
 
 .container {
@@ -125,6 +142,12 @@ body {
   flex: 1;
   overflow-y: auto;
   word-wrap: break-word;
+}
+.container .msg .message {
+  margin: 15px 15px;
+  background-color: #f3f3f3;
+  padding: 5px 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 .container .msg .message span {
   background-color: wheat;

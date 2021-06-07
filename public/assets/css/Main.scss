@@ -44,16 +44,19 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-direction: column;
 
-  .item {
+  .item :hover {
+    opacity: 0.8;
+  }
+
+  .item img {
+    padding-bottom: 15px;
     cursor: pointer;
     display: flex;
     width: 25px;
     height: 25px;
 
-    :hover {
-      opacity: 0.8;
-    }
   }
 }
 
@@ -133,7 +136,22 @@ body {
       margin: 15px 0 15px 0;
       border-top: $myGray solid 1px;
       border-left: $myGray solid 1px;
+      overflow-y: auto;
+      word-wrap: break-word;
+      .users {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
 
+        p {
+          justify-content: center;
+          display: flex;
+          margin: 15px 0;
+          font-size: 1.1em;
+        }
+      }
     }
   }
 }
@@ -149,6 +167,11 @@ body {
     word-wrap: break-word;
 
     .message {
+      margin: 15px 15px;
+      background-color: #f3f3f3;
+      padding: 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+
       span {
         background-color: wheat;
       }

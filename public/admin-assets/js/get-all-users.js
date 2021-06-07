@@ -73,7 +73,6 @@ function get_all() {
                 tbody.appendChild(tr);
             }
         } else {
-            console.log(value.error.code);
         }
     });
 }

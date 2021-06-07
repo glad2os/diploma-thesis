@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chat - <%= room %></title>
     <link rel="stylesheet" href="/assets/css/Main.css">
+    <link rel="shortcut icon" href="/assets/img/logo.png" type="image/x-icon">
 </head>
 <body>
 <div class="nav">
+    <% if ((typeof (admin_gear) !== 'undefined') && (admin_gear === 1)) { %>
+        <div class="item">
+            <a href="/admin">
+                <img onclick="" src="/assets/img/Gear-001_3D.svg" alt="">
+            </a>
+        </div>
+    <% } %>
     <div class="item">
-        <img src="/assets/img/Gear-001_3D.svg" alt="">
+        <img onclick="closeSession();" src="/assets/img/cancel.svg" alt="">
     </div>
 </div>
 <div class="info">

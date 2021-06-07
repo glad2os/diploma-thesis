@@ -20,7 +20,6 @@ function upload() {
 
             if (resp.status === 200) {
                 if (myDropzone.files.length > 0) {
-                    console.log(resp.status);
                     myDropzone.enqueueFile(myDropzone.files[0]);
                 }
                 get_all();

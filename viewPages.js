@@ -50,7 +50,8 @@ app.get('/chat', function (req, res) {
         res.render('chat.ejs', {
             'username': req.session.username,
             'room': req.query.server,
-            'server_img': response['img_path']
+            'server_img': response['img_path'],
+            'admin_gear': req.session.adminPass ? 1 : 0
         });
     });
 });
