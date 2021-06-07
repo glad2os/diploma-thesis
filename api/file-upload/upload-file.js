@@ -14,17 +14,25 @@ app.get("/getfile/:fileId", function (req, res) {
     res.send(req.params)
 });
 
+const ADMIN_PASSWORD = typeof process.env.ADMIN_PASSWORD === 'undefined' ? "test" : process.env.ADMIN_PASSWORD;
+
 app.post('/addServerImg', function (req, res) {
-    if (req.session.username === "" || req.session.username === undefined) {
-        res.send('403 access forbidden');
-        res.end();
+
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
         return;
     }
 
-    let newPath = __dirname + "../../../public/assets/img/";
+    let newPath = __dirname + "/../../public/assets/img/";
+    console.log(newPath);
     let array = Object.values(req.files);
     array.forEach(value => {
-        fs.writeFile(newPath + req.body.filename + '.' + value.name.split('.')[1], value.data, function (err) {
+        fs.writeFile(newPath + value.name, value.data, function (err) {
             if (err) res.json(err.message);
         });
     });

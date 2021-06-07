@@ -9,24 +9,23 @@ myDropzone.on("totaluploadprogress", function (progress) {
     document.querySelector(".progress-bar").style.width = progress + "%";
 });
 
-myDropzone.on("sending", function (file, xhr, formData) {
-    formData.append("filename", document.getElementById("serverinput").value);
-});
 
 function upload() {
     if (document.getElementById("serverinput").value.length > 2) {
         getJson("servers/regServer", {
             "name": document.getElementById("serverinput").value,
-            "img_path": myDropzone.files.length
+            "img_path": myDropzone.files[0].name
         }).then(resp => {
             document.getElementById('tbody').innerHTML = "";
+
             if (resp.status === 200) {
                 if (myDropzone.files.length > 0) {
+                    console.log(resp.status);
                     myDropzone.enqueueFile(myDropzone.files[0]);
                 }
                 get_all();
                 updateStatusLabel();
-                myDropzone.removeAllFiles();
+               // myDropzone.removeAllFiles();
             } else {
                 alert(resp.json().error);
             }

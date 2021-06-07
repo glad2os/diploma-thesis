@@ -88,7 +88,7 @@ app.post('/updatelist', function (req, res) {
 
     sql = `insert into users_server_list (user_id, server_id) values`; // ((select id from users where username = "gladdos"),?)`
     for (let i = 0; i < req.body.serversids.length; i++) {
-        let prepare = sql + '((select id from users where username = "'+req.body.username+'"),' + req.body.serversids[i] + ")";
+        let prepare = sql + '((select id from users where username = "' + req.body.username + '"),' + req.body.serversids[i] + ")";
         db.run(prepare, [], (err, data) => {
             if (err) {
                 res.json(
@@ -150,7 +150,7 @@ app.post('/regServer', function (req, res) {
         return;
     }
     let img_path = "";
-    if (req.body.img_path > 0) img_path = "/assets/img/" + req.body.name;
+    if (req.body.img_path.length > 0) img_path = "/assets/img/" + req.body.img_path;
 
     let sql = `insert into servers (name, img_path) VALUES (?,?)`;
     db.all(sql, req.body.name, img_path, (err, data) => {
@@ -161,6 +161,7 @@ app.post('/regServer', function (req, res) {
                 }
             );
         }
+        res.statusCode = 200;
         res.end();
     });
 });
