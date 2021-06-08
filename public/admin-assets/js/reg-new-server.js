@@ -14,7 +14,7 @@ function upload() {
     if (document.getElementById("serverinput").value.length > 2) {
         getJson("servers/regServer", {
             "name": document.getElementById("serverinput").value,
-            "img_path": myDropzone.files[0].name
+            "img_path": typeof(myDropzone.files[0]) !== "undefined" ? myDropzone.files[0].name : ""
         }).then(resp => {
             document.getElementById('tbody').innerHTML = "";
 

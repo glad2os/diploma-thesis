@@ -15,12 +15,12 @@ module.exports = function (io, socket) {
             if (fs.existsSync(dir)) {
                 if (type[0] === "image") {
                     const contents = fs.readFileSync(dir + filename, {encoding: 'base64'});
-                    io.to(user.room).emit('message', formatMessage(user.username, `<img style='width: 55vw;' src="data:${filetype};base64,${contents}"`));
+                    io.to(user.room).emit('message', formatMessage(user.username, `<img style='width: 30%;' src="data:${filetype};base64,${contents}"`));
                     let serverId = await getServerIdByName(user.room);
                     let userId = await getUserIdByUsername(user.username);
 
                     if (typeof serverId !== "undefined" && typeof userId !== "undefined") {
-                        await addMessage(serverId, `<img style='width: 55vw;' src="data:${filetype};base64,${contents}"`, userId);
+                        await addMessage(serverId, `<img style='width: 30%;' src="data:${filetype};base64,${contents}"`, userId);
                     }
                 }
             } else {
