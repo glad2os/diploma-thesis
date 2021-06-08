@@ -50,7 +50,8 @@
                             </div>
                             <label class="mdb-main-label" onclick="updateList();">Обновить список доступных
                                 серверов</label>
-                            <input value="Обновить у пользователя" class="btn-save btn btn-primary btn-sm" onclick="updateUsrAv('<%= username %>');">
+                            <input value="Обновить у пользователя" class="btn-save btn btn-primary btn-sm"
+                                   onclick="updateUsrAv('<%= username %>');">
 
                         </form>
                     </div>
@@ -65,6 +66,16 @@
 <script src="/admin-assets/js/theme.js"></script>
 <script src="/assets/js/getJson.js"></script>
 <script src="/admin-assets/js/editusr.js"></script>
+<script>
+    getJson("user/getAvailableServers", {
+        "username": '<%= username %>'
+    }).then(response => response.json()).then(value1 => {
+        value1.forEach(value2 => {
+            let childNodes = Array.from(document.querySelector('.form-select').childNodes).filter(o => o.innerText === value2.name);
+            if (childNodes.length > 0) childNodes[0].selected = "true";
+        });
+    });
+</script>
 </body>
 
 </html>
