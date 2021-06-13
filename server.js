@@ -35,12 +35,6 @@ app.use(api.getSession());
 app.use('/api', api.app);
 app.use('/', view);
 
-const isDocker = require('is-docker');
-
-if (isDocker()) {
-    console.log('Running inside a Docker container');
-}
-
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 });

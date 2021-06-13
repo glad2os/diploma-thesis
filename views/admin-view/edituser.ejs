@@ -31,14 +31,14 @@
                         <form class="user">
                             <div class="form-group"><input class="form-control form-control-user" type="text"
                                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                                           placeholder="<%= username %>" name="login"
+                                                           readonly name="login"
                                                            value="<%= username %>"></div>
                             <div class="form-group">
                                 <input class="form-control form-control-user"
                                        type="password" id="examplePasswordInput"
                                        name="password"></div>
                             <input value="Обновить пользователя" class="btn btn-primary btn-block text-white btn-user"
-                                   onclick="">
+                                   onclick="updateUser('<%= username %>')">
 
                             <hr>
 

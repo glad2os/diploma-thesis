@@ -32,8 +32,12 @@ app.get('/', function (req, res) {
     }
 });
 
-app.get('/chat', function (req, res) {
+app.get('/exit', function (req, res) {
+    req.session.destroy();
+    res.redirect('/');
+});
 
+app.get('/chat', function (req, res) {
     if (req.session.username === "" || req.session.username === undefined || req.query.server === undefined) {
         res.send('403 access forbidden');
         res.end();

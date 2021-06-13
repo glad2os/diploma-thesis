@@ -132,44 +132,6 @@ app.post('/reguser', function (req, res) {
     });
 });
 
-
-app.post('/updateuser', function (req, res) {
-    if (req.session.adminPass !== ADMIN_PASSWORD) {
-        res.statusCode = 403;
-        res.json(
-            {
-                "error": "Нет доступа к админ панели"
-            }
-        );
-        return;
-    }
-
-    if (typeof req.body.username === "undefined" ||
-        typeof req.body.password === "undefined" ||
-        typeof req.body.id === "undefined") {
-        res.statusCode = 403;
-        res.json(
-            {
-                "error": "Лимиты не заданы"
-            }
-        );
-        return;
-    }
-
-    let sql = `UPDATE users SET username = ?, password_hash = ? where id = ?`;
-
-    db.get(sql, req.body.username, md5(req.body.password), req.body.id, (err) => {
-        if (err) {
-            res.json(
-                {
-                    "error": err
-                }
-            );
-        }
-        res.end();
-    });
-});
-
 app.post('/removeuser', function (req, res) {
     if (req.session.adminPass !== ADMIN_PASSWORD) {
         res.statusCode = 403;
@@ -205,6 +167,40 @@ app.post('/removeuser', function (req, res) {
     });
 });
 
+app.post('/updateuser', function (req, res) {
+    if (req.session.adminPass !== ADMIN_PASSWORD) {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Нет доступа к админ панели"
+            }
+        );
+        return;
+    }
+
+    if (typeof req.body.username === "undefined" || typeof req.body.password === "undefined") {
+        res.statusCode = 403;
+        res.json(
+            {
+                "error": "Данные не заданы"
+            }
+        );
+        return;
+    }
+
+    let sql = `update users SET password_hash = ? where username = ?`;
+
+    db.get(sql, md5(req.body.password), req.body.username, (err) => {
+        if (err) {
+            res.json(
+                {
+                    "error": err
+                }
+            );
+        }
+        res.end();
+    });
+});
 
 app.post('/getAvailableServers', function (req, res) {
     getAvailableServers(req.body.username, (value) => {

@@ -20,3 +20,11 @@ async function updateUsrAv(username) {
         "serversids": Array.from(document.querySelector('.form-select').selectedOptions).map(o => Number(o.value))
     }).then(value => alert("done!"));
 }
+
+async function updateUser(username) {
+
+    await getJson("user/updateuser", {
+        "username": username,
+        "password": document.getElementById('examplePasswordInput').value
+    }).then(value => alert("done!"));
+}
