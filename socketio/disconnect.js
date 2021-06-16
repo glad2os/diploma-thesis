@@ -10,7 +10,7 @@ module.exports = function (io, socket) {
                 users: getUniqRoomUsers(user.room)
             });
             if (!isUserOnline(user.username))
-                io.to(user.room).emit('message', formatMessage('System', `A ${user.username} has left the chat`));
+                io.to(user.room).emit('message', formatMessage('System', `A  user ${user.username} has left the chat`));
         }
     });
 }

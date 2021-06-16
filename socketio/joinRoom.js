@@ -7,16 +7,18 @@ const formatMessage = require('../utils/messages');
 
 module.exports = function (io, socket) {
     socket.on('joinRoom', async ({username, room}) => {
+
+        if (!isUserOnline(username)) {
+            socket.broadcast
+                .to(room)
+                .emit('message', formatMessage('System', `A user ${username} has jounded the chat`));
+        }
+
         const user = userJoin(socket.id, username, room);
         socket.join(user.room);
-        if (!isUserOnline(username)) {
-            //Broadcast when a user connects
-            socket.broadcast
-                .to(user.room)
-                .emit('message', formatMessage('System', `A user ${user.username} has jounded the chat`));
-        }
+
         // Send Users & room info
-        socket.emit('roomUsers', {
+        io.to(room).emit('roomUsers', {
             room: room,
             users: getUniqRoomUsers(room)
         });
@@ -35,4 +37,3 @@ module.exports = function (io, socket) {
             socket.emit('messages', await getMessages(await getServerIdByName(user.room), offset, limit));
     });
 };
-
